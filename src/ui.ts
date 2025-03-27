@@ -204,31 +204,30 @@ export const iniciaPartida = (tablero: Tablero): void => {
 };
 
 const displayWarningMessage = (display: WarningMessage): void => {
+  switch (display) {
+    case "DebesDarleAlBotón":
+      mostrarMensaje("▶️ Pulsa el botón 'Comenzar partida'", "#F59432");
+      break;
+    case "YaHasVolteadoEstaCarta":
+      mostrarMensaje("⚠️ Carta volteada. Elige otra carta.", "#F59432");
+      break;
+    case "HasCompletadoLaPartida":
+      mostrarMensaje("🎉 ¡Lo conseguiste!", "#FFA5B5");
+      break;
+    case "InformaciónGenérica":
+      mostrarMensaje("¡Encuentra todas las parejas! 🦁🐔🐶🦉🐝🐷", "#E6F4F1");
+      break;
+  }
+};
+
+const mostrarMensaje = (mensaje: string, color: string) => {
   const warningMessageElement = document.getElementById("warning-message");
+
   if (
     warningMessageElement &&
     warningMessageElement instanceof HTMLParagraphElement
   ) {
-    switch (display) {
-      case "DebesDarleAlBotón":
-        warningMessageElement.innerHTML =
-          "▶️ Pulsa el botón 'Comenzar partida'";
-        warningMessageElement.style.backgroundColor = "#F59432";
-        break;
-      case "YaHasVolteadoEstaCarta":
-        warningMessageElement.innerHTML =
-          "⚠️ Carta volteada. Elige otra carta.";
-        warningMessageElement.style.backgroundColor = "#F59432";
-        break;
-      case "HasCompletadoLaPartida":
-        warningMessageElement.innerHTML = "🎉 ¡Lo conseguiste!";
-        warningMessageElement.style.backgroundColor = "#FFA5B5";
-        break;
-      case "InformaciónGenérica":
-        warningMessageElement.innerHTML =
-          "¡Encuentra todas las parejas! 🦁🐔🐶🦉🐝🐷";
-        warningMessageElement.style.backgroundColor = "#E6F4F1";
-        break;
-    }
+    warningMessageElement.innerHTML = mensaje;
+    warningMessageElement.style.backgroundColor = color;
   }
 };
